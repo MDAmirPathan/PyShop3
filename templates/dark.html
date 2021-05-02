@@ -1,0 +1,24 @@
+<script src="/store/inc/clientapi/ac-client-api.js"></script>
+
+
+Then place an html snippet similar to the following where you want the Cart display to show on your site.
+
+  <div class="ShopCartLine">
+    <span class="CartItemsCount"></span> item(s) - <span class="CartSubTotal">$</span>
+  </div>
+
+
+Then place the following script after the html.
+
+<script>
+    //declared outside of the AC.cart scope
+    var oCart;
+
+    //set the response to oCart
+    AC.cart.get(function(response){
+ oCart = response;
+ //set the count and subtotal to the values returned.
+ $(".CartItemsCount").html( oCart.cart.totalItemCount );
+ $(".CartSubTotal").html( "$" + oCart.cart.subtotal );
+ });
+</script>
