@@ -14,7 +14,7 @@ var products = {
   },
   124: {
     name : "Berry",
-    desc : "from kerla.",
+    desc : "from kerala.",
     img : "dummy-pdt-b.jpg",
     price : 130
   },
