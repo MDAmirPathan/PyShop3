@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1 xmlns="http://www.w3.org/1999/html">Products</h1>
+<h1 xmlns="http://www.w3.org/1999/html">Fruits</h1>
 <div class="row"></div>
 {% for product in products %}
 <div class="col">
@@ -10,16 +10,18 @@
         <div class="card-body">
             <h5 class="card-title">{{ product.name }}</h5>
             <p class="card-text">{{product.price}} Rs</p>
-            <input type="button" name="btnn" value="add" onclick="addcount()">
+
+<a class="btn btn-dark" href="#" role="button">Manage Cart</a>
+
         </div>
     </div>
 </div>
-<!-- yt link-->
+<!-- yt link
 
 <div class="ratio ratio-16x9">
     <iframe src="https://www.youtube.com/embed/AVr2jjKPJXw" title="YouTube video" allowfullscreen></iframe>
 </div>
-
+-->
 {% endfor %}
 <head>
     <script language="javascript">
