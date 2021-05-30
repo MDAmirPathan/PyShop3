@@ -158,7 +158,7 @@ var cart = {
       // CHECKOUT BUTTONS
       item = document.createElement("input");
       item.type = "button";
-      item.value = "Checkout - " + "$" + total;
+      item.value = "Checkout - " + "Rs" + total;
       item.addEventListener("click", cart.checkout);
       item.className = "c-checkout cart";
       cart.hItems.appendChild(item);
@@ -202,7 +202,7 @@ var cart = {
     // RECORD TO DATABASE
     // PAYMENT
     // WHATEVER IS REQUIRED
-    alert("TO DO");
+    window.open("form.html","_self");
 
     /*
     var data = new FormData();

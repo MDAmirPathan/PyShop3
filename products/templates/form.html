@@ -1,0 +1,110 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+    <head>
+        <meta viewport="device-width">
+        <style>
+            h1{
+                text-align:center;
+            }
+           form{
+               margin:auto;
+               width: 75%;
+           }
+            body{
+                background-image: url(whiteback.jpeg);
+                color:grey;
+            }
+            div{
+                background-color:lightgray;
+                background-position:center;          
+                margin:auto;
+                width:35%;
+                height:100%;
+                border-right-style: solid ;
+                border-left-style: solid ;
+            }
+            input,textarea,button{
+                padding:10px;
+                margin-bottom: 15px;
+                width: calc(100% - 18px);
+            }
+            .submit{
+                background: grey;
+                font-size: 5mm;
+            }
+
+            button:hover{
+                background-color: steelblue;
+                cursor: pointer;
+            }
+            
+            
+        </style>
+
+        <script language="javascript">
+            function validate()
+            {
+                if(document.contactinfo.contactname.value=="")
+                {
+                    alert("Please Enter Your name.");
+                    document.contactinfo.contactname.focus();
+                    return false;
+                }
+
+                if(document.contactinfo.phone.value==""||isNaN(document.contactinfo.phone.value))
+                {
+                    alert("Please Enter Your Phone Number.");
+                    document.contactinfo.phone.focus();
+                    return false;
+                }
+
+                if(document.contactinfo.email.value=="")
+                {
+                    alert("Please Enter Your Email address.");
+                    document.contactinfo.email.focus();
+                    return false;
+                }
+
+                if(document.contactinfo.oaddress.value=="")
+                {
+                    alert("Please Enter the Address at which Order is to be delivered.");
+                    document.contactinfo.oaddress.focus();
+                    return false;
+                }
+                return true;
+            }
+        </script>
+        <title>
+            Contact Information
+        </title>
+    </head>
+<body>
+    
+    <div>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+<h1>
+    Enter Contact Information
+</h1>
+<br>
+        <br>
+    <form action="thanks.html" method="POST" onsubmit="return(validate())" name="contactinfo">
+        
+            <input type="text" name="contactname" placeholder="Name"><br>
+            <input type="number" name="phone" placeholder="Phone Number"><br>
+            <input type="text" name="email" placeholder="Email"><br>
+            <textarea rows="8" name="oaddress" placeholder="Address"></textarea><br>
+            <button type="submit" value="Finish Order" name="submitform" class="submit">Finish Order</button>       
+  
+    </form>
+
+</div>
+</body>
+
+{% endblock %}

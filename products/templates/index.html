@@ -2,27 +2,57 @@
 
 {% block content %}
 <h1 xmlns="http://www.w3.org/1999/html">Fruits</h1>
-<div class="row"></div>
+
+<!-- body -->
+<div class="container-fluid mt-3">
+	<div class="row">
+
+
+		<!-- filter -->
+
+		<div class="col-lg-3 mx-auto">
+			<div class="list-group">
+
+				<a href="/" class="list-group-item list-group-item-action">All Products</a>
+
+				{% for category in categories %}
+				<a href="/?category={{category.id}}"
+					class="list-group-item list-group-item-action">{{category.name}}</a>
+				{% endfor %}
+			</div>
+		</div>
+  
+
+	<!-- all products -->
+		<div id='products' class="col-lg-9 mx-auto">
+			<div class="row mx-auto">
 {% for product in products %}
 <div class="col">
-    <div class="card" style="width: 18rem;">
-        <img src="{{ product.image_url }}" class="card-img-top" alt="...">
+    <div class="card mx-auto mb-3" style="width: 18rem;">
+        <img class="card-img-top" src="{{ product.image.url }}" alt="Card image cap">
         <div class="card-body">
             <h5 class="card-title">{{ product.name }}</h5>
-            <p class="card-text">{{product.price}} Rs</p>
+            <h5 class="card-text">{{ product.category.name }}</h5>
+            <h5 class="card-text">{{ product.description }}</h5>
+             <p class="card-text">{{product.price}} Rs</p>
 
 <a class="btn btn-dark" href="#" role="button">Manage Cart</a>
 
         </div>
     </div>
 </div>
+
 <!-- yt link
 
 <div class="ratio ratio-16x9">
     <iframe src="https://www.youtube.com/embed/AVr2jjKPJXw" title="YouTube video" allowfullscreen></iframe>
 </div>
 -->
+
 {% endfor %}
+</div>
+</div>
+</div>
 <head>
     <script language="javascript">
 var count;
@@ -45,6 +75,7 @@ id.innerhtml=count;
           margin: 0;
           padding: 0;
           font-family: sans-serif;
+          
         }
         main{
           margin: 5vh 15%;
@@ -88,8 +119,9 @@ id.innerhtml=count;
             background: #fff;
         }
         body.night{
-            background: #000;
+            background: #001A15;
             color: #fff;
+            
         }
         @media screen and (min-width:900px) {
           .respon{
@@ -105,16 +137,18 @@ id.innerhtml=count;
             max-width: 80%;
             line-height: 30px;
           }
+          h5,p{
+            color:black;
+          }
         }
 
     </style>
 </head>
-<body>
+<body background='whiteback.jpeg'>
 <header>
     <label id="dark-change"></label>
 </header>
 <main>
-
     <div class="respon">
     </div>
 </main>
@@ -127,6 +161,8 @@ id.innerhtml=count;
         })
 
 </script>
+
 </body>
 </html>
+</div>
 {% endblock %}

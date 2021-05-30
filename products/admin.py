@@ -1,14 +1,22 @@
 from django.contrib import admin
-from .models import Product, Offer
+from .models.product import Product
+from .models.category import Category
+from .models.customer import Customer
 
 
 class OfferAdmin(admin.ModelAdmin):
     list_display = ('code', 'discount')
 
 
-class ProdcutAdmin(admin.ModelAdmin):
-    list_display = ('name', 'price', 'stock')
+class AdminProduct(admin.ModelAdmin):
+    list_display = ['name', 'price', 'category']
 
 
-admin.site.register(Offer, OfferAdmin)
-admin.site.register(Product, ProdcutAdmin)
+class AdminCategory(admin.ModelAdmin):
+    list_display = ['name']
+
+
+# Register your models here.
+admin.site.register(Product, AdminProduct)
+admin.site.register(Category, AdminCategory)
+admin.site.register(Customer)
