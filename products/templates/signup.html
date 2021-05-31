@@ -3,83 +3,141 @@
 
 {% block content %}
 
-<div class="container mt-4">
-    
-    <div class="p-4 m-4">
+    <head>
+        <meta viewport="device-width">
+        <style>
+            h1{
+                text-align:center;
+            }
+           form{
+               margin:auto;
+               width: 75%;
+           }
+            body{
+                background-image: url(whiteback.jpg);
+                color:grey;
+            }
+            div{
+                background-color:lightgray;
+                background-position:center;          
+                margin:auto;
+                width:35%;
+                height:100%;
+                border-right-style: solid ;
+                border-left-style: solid ;
+            }
+            input,textarea,button{
+                padding:10px;
+                margin-bottom: 15px;
+                width: calc(100% - 18px);
+            }
+            .submit{
+                background: grey;
+                font-size: 5mm;
+            }
 
-        
-        <div class="col-lg-5 rounded mx-auto border pt-4">
-            <div class="text-center col">
+            button:hover{
+                background-color: steelblue;
+                cursor: pointer;
+            }
+            p{
+                text-align: center;
+            }
             
-                <img 
-                src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/Shopping_cart_with_food_clip_art_2.svg/307px-Shopping_cart_with_food_clip_art_2.svg.png" alt=""
-                class="" style="height: 150px;">
-            <!-- <hr> -->
-            <div class="display-8">Create An Account</div>
-            <hr>
-            </div>
-            <h3 hidden class="alert alert-light border rounded">Create An Account</h3>
-            <form action="/signup" method="POST">
-                
-                {% csrf_token %}
+            
+        </style>
+
+        <script language="javascript">
+            function validate()
+            {
+                if(document.contactinfo.firstname.value=="")
+                {
+                    document.getElementById("message").innerHTML="Please Enter Your First name.";
+                    document.contactinfo.firstname.focus();
+                    return false;
+                }
+
+                if(document.contactinfo.lastname.value=="")
+                {
+                    document.getElementById("message").innerHTML="Please Enter Your Last name.";
+                    document.contactinfo.lastname.focus();
+                    return false;
+                }
+
+                if(document.contactinfo.phone.value==""||isNaN(document.contactinfo.phone.value))
+                {
+                    document.getElementById("message").innerHTML="Please Enter Your Phone Number.";
+                    document.contactinfo.phone.focus();
+                    return false;
+                }
+
+                if(document.contactinfo.email.value=="")
+                {
+                    document.getElementById("message").innerHTML="Please Enter Your Email.";
+                    document.contactinfo.email.focus();
+                    return false;
+                }
+
+                if(document.contactinfo.password.value=="")
+                {
+                    document.getElementById("message").innerHTML="Please Enter a Password.";
+                    document.contactinfo.password.focus();
+                    return false;
+                }
+
+                if(document.contactinfo.password2.value=="")
+                {
+                    document.getElementById("message").innerHTML="Please Confirm Your Password.";
+                    document.contactinfo.password2.focus();
+                    return false;
+                }
+                if(document.contactinfo.password.value!==document.contactinfo.password2.value)
+                {
+                    document.getElementById("message").innerHTML="Passwords do not match";
+                    return false;
+                }
+                return true;
+            }
+        </script>
+        <title>
+            SignUp
+        </title>
+    </head>
+<body>
+    
+    <div>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+<h1>
+    Create an Account
+</h1><br>
+<p id="message">
+
+</p>
+<br>
+        <br>
+    <form action="/signup" method="POST" onsubmit="return(validate())" name="contactinfo">
+        {% csrf_token %}
 
                 {% if error%}
                 <div class="alert alert-danger" role="alert">
                     {{error}}
                 </div>
                 {% endif %}
-                <!-- firstname -->
-                <div class="form-group">
-                    <label for="">First Name</label>
-                    <input required type="text" name="firstname"
-                     id="" value="{{values.first_name}}" class="form-control form-control-sm" 
-                     placeholder="">
-                </div>
 
-                <!-- last name -->
-                <div class="form-group">
-                    <label for="">Last Name</label>
-                    <input type="text" name="lastname" 
-                    id="" value="{{values.last_name}}" class="form-control form-control-sm"
-                    >
-                </div>
+            <input type="text" name="firstname" placeholder="FirstName"><br>
+            <input type="text" name="lastname" placeholder="LastName"><br>
+            <input type="number" name="phone" placeholder="Phone Number"><br>
+            <input type="text" name="email" placeholder="Email"><br>
+            <input type="password" name="password" placeholder="Password"><br>
+            <input type="password" name="password2" placeholder="Confirm your Password"><br>
+            <button type="submit" value="Signup" name="submitform" class="submit">SignUp</button>       
+  
+    </form>
 
-                <!-- phone -->
-                <div class="form-group">
-                    <label for="">Phone</label>
-                    <input required type="text" name="phone" 
-                    id="" class="form-control form-control-sm"
-                    value="{{values.phone}}"
-                    placeholder="565698959"
-                    >
-                </div>
-                <!-- email -->
-                <div class="form-group">
-                    <label for="">Email</label>
-                    <input required type="email" name="email" id=""
-                    value="{{values.email}}" 
-                    class=" form-control-sm form-control" placeholder="example@gmail.com">
-                </div>
-
-
-                <!-- password -->
-                <div class="form-group">
-                    <label for="">Password</label>
-                    <input required type="password" 
-                    name="password" 
-                    id=""
-                     class="form-control form-control-sm" placeholder="********">
-                </div>
-
-                <hr>
-                <div class="form-group">
-                    <input class="btn btn-sm btn-info" type="submit" value="Create An Account ">
-                </div>
-
-                
-            </form>
-        </div>
-    </div>
 </div>
-
+</body>
 {% endblock %}

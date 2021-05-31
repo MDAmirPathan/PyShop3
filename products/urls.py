@@ -1,13 +1,18 @@
-from django.contrib import admin
 from django.urls import path
-from . import views
-from .views import index, signup
+from products.views import signup, login, home
+
+# from django.contrib import admin
+# from . import views
+# from .views import home
+# from .views import index, Signup, Login
 
 urlpatterns = [
-    path('', index , name='homepage'),
-    path('new', views.new),
-    path('cart', views.cart),
-    path('getcookie', views.getcookie),
-    path('setcookie', views.setcookie),
-    path('signup', signup)
+    path('', home.index, name='homepage'),
+    # path('new', views.new), ye views.py me tha but abhi home.py me he jab chahiye tab home.new karna
+    # path('cart', views.cart),
+    # path('getcookie', views.getcookie),
+    # path('setcookie', views.setcookie),
+    path('signup', signup.Signup.as_view(), name='signup'),
+    path('login', login.Login.as_view(), name='login')
+
 ]
