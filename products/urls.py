@@ -1,5 +1,6 @@
 from django.urls import path
 from products.views import signup, login, home
+from products.views.home import Index
 
 # from django.contrib import admin
 # from . import views
@@ -7,7 +8,7 @@ from products.views import signup, login, home
 # from .views import index, Signup, Login
 
 urlpatterns = [
-    path('', home.index, name='homepage'),
+    path('', Index.as_view(), name='homepage'),
     # path('new', views.new), ye views.py me tha but abhi home.py me he jab chahiye tab home.new karna
     # path('cart', views.cart),
     # path('getcookie', views.getcookie),

@@ -1,59 +1,99 @@
 {% extends 'base.html' %}
 
 {% block content %}
+
+{% load cart %}
 <h1 xmlns="http://www.w3.org/1999/html">Fruits</h1>
+
 
 <!-- body -->
 <div class="container-fluid mt-3">
-	<div class="row">
+    <div class="row">
 
 
-		<!-- filter -->
+        <!-- filter -->
 
-		<div class="col-lg-3 mx-auto">
-			<div class="list-group">
+        <div class="col-lg-3 mx-auto">
+            <div class="list-group">
 
-				<a href="/" class="list-group-item list-group-item-action">All Products</a>
+                <a href="/" class="list-group-item list-group-item-action">All Products</a>
 
-				{% for category in categories %}
-				<a href="/?category={{category.id}}"
-					class="list-group-item list-group-item-action">{{category.name}}</a>
-				{% endfor %}
-			</div>
-		</div>
-  
+                {% for category in categories %}
+                <a href="/?category={{category.id}}"
+                   class="list-group-item list-group-item-action">{{category.name}}</a>
+                {% endfor %}
+            </div>
+        </div>
 
-	<!-- all products -->
-		<div id='products' class="col-lg-9 mx-auto">
-			<div class="row mx-auto">
-{% for product in products %}
-<div class="col">
-    <div class="card mx-auto mb-3" style="width: 18rem;">
-        <img class="card-img-top" src="{{ product.image.url }}" alt="Card image cap">
-        <div class="card-body">
-            <h5 class="card-title">{{ product.name }}</h5>
-            <h5 class="card-text">{{ product.category.name }}</h5>
-            <h5 class="card-text">{{ product.description }}</h5>
-             <p class="card-text">{{product.price}} Rs</p>
 
-<a class="btn btn-dark" href="#" role="button">Manage Cart</a>
+        <!-- all products -->
+        <div id='products' class="col-lg-9 mx-auto">
+            <div class="row mx-auto">
+                {% for product in products %}
+                <div class="col">
+                    <div class="card mx-auto mb-3" id={{product.id}} style="width: 18rem;">
+                        <img class="card-img-top" src="{{ product.image.url }}" alt="Card image cap">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ product.name }}</h5>
+                            <h5 class="card-text">{{ product.category.name }}</h5>
+                            <h5 class="card-text">{{ product.description }}</h5>
+                            <p class="card-text">{{product.price}} Rs</p>
+                            <!--{{product | is_in_cart:request.session.cart }} -->
 
+
+                            <div class="card-footer p-0 ">
+
+                                {% if product|is_in_cart:request.session.cart%}
+
+                                <div class="row no-gutter">
+                                    <form action="/#{{product.id}}" class="col-2" method="POST">
+                                        {% csrf_token %}
+                                        <input hidden type="text" name="product" value="{{product.id}}">
+                                        <input hidden type="text" name="remove" value='True'>
+                                        <input type="submit" value=" - " class="btn btn-block btn-secondary">
+                                    </form>
+                                    <div class=
+                                                 "text-center col">{{product|cart_quantity:request.session.cart}} in
+                                        cart
+                                    </div>
+                                    <form action="/#{{product.id}}" class="col-2" method="POST">
+                                        {% csrf_token %}
+                                        <input hidden type="text" name="product" value="{{product.id}}">
+                                        <input type="submit" value=" + " class="btn btn-block btn-secondary">
+                                    </form>
+                                </div>
+
+                                {% else %}
+                                <form action="/#{{product.id}}" method="POST">
+
+                                    {% csrf_token %}
+
+                                    <input hidden type="text" name="product" value="{{product.id}}">
+                                    <input class="btn btn-dark" type="submit" role="button" value="Manage Cart">
+                                </form>
+
+                                {% endif %}
+
+
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+
+                <!-- yt link
+
+                <div class="ratio ratio-16x9">
+                    <iframe src="https://www.youtube.com/embed/AVr2jjKPJXw" title="YouTube video" allowfullscreen></iframe>
+                </div>
+                -->
+
+                {% endfor %}
+            </div>
         </div>
     </div>
-</div>
 
-<!-- yt link
-
-<div class="ratio ratio-16x9">
-    <iframe src="https://www.youtube.com/embed/AVr2jjKPJXw" title="YouTube video" allowfullscreen></iframe>
-</div>
--->
-
-{% endfor %}
-</div>
-</div>
-</div>
-<head>
     <script language="javascript">
 var count;
 function addcount(id)
@@ -61,16 +101,18 @@ function addcount(id)
 count=count+1;
 id.innerhtml=count;
 }
-</script>
 
-</head>
-<!-- bg dark-->
 
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>East dark mode</title>
-    <style>
+
+
+
+    </script>
+
+
+    <head>
+        <meta charset="UTF-8">
+        <title>East dark mode</title>
+        <style>
         body{
           margin: 0;
           padding: 0;
@@ -142,17 +184,22 @@ id.innerhtml=count;
           }
         }
 
-    </style>
-</head>
-<body background='whiteback.jpeg'>
-<header>
-    <label id="dark-change"></label>
-</header>
-<main>
-    <div class="respon">
-    </div>
-</main>
-<script>
+
+
+
+
+
+        </style>
+    </head>
+    <body background='whiteback.jpeg'>
+    <header>
+        <label id="dark-change"></label>
+    </header>
+    <main>
+        <div class="respon">
+        </div>
+    </main>
+    <script>
         var content = document.getElementsByTagName('body')[0];
         var darkMode = document.getElementById('dark-change');
         darkMode.addEventListener('click', function(){
@@ -160,9 +207,15 @@ id.innerhtml=count;
             content.classList.toggle('night');
         })
 
-</script>
 
-</body>
-</html>
+
+
+
+
+    </script>
+
+    </body>
 </div>
+
+
 {% endblock %}
